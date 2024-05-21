@@ -1,6 +1,7 @@
 # Projeto Pokédex
 
-- ![image](https://github.com/rianjsp/Pokemons_api/assets/116752833/6d31cd07-0593-4452-bc36-c3a9c051ea33)
+ ![image](https://github.com/rianjsp/Pokemons_api/assets/116752833/6d31cd07-0593-4452-bc36-c3a9c051ea33)
+ ![image](https://github.com/rianjsp/Pokemons_api/assets/116752833/b2a0523c-657d-48d9-898f-f9999e3defc9)
 
 
 Este é um projeto simples de uma Pokédex utilizando a API do Pokémon. Foi desenvolvido com as tecnologias Vite e Vue, juntamente com o Axios para requisições HTTP e o Tailwind CSS para estilização.
