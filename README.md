@@ -14,7 +14,8 @@ Este é um projeto simples de uma Pokédex utilizando a API do Pokémon. Foi des
 
 - Listagem de pokémons necessarios para o projeto.
 - Detalhes de cada Pokémon, incluindo nome, tipo, habilidades e imagem.
-
+- Pesquisa de cada Pokémon existente na api (por ID ou Nome).
+  
 ## Como executar o projeto
 
 1. Clone o repositório
