@@ -1,7 +1,35 @@
-# Vue 3 + Vite
+# Projeto Pokédex
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Este é um projeto simples de uma Pokédex utilizando a API do Pokémon. Foi desenvolvido com as tecnologias Vite e Vue, juntamente com o Axios para requisições HTTP e o Tailwind CSS para estilização.
 
-## Recommended IDE Setup
+## Funcionalidades
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+- Listagem de pokémons necessarios para o projeto.
+- Detalhes de cada Pokémon, incluindo nome, tipo, habilidades e imagem.
+
+## Como executar o projeto
+
+1. Clone o repositório
+2. Instale as dependências com `npm install`
+3. Execute o projeto com `npm run dev`
+
+## API utilizada
+
+A API utilizada neste projeto foi a [Pokémon API](https://pokeapi.co/), que fornece informações detalhadas sobre todos os Pokémons.
+
+## Tecnologias utilizadas 
+[![JavaScript](https://img.shields.io/badge/Javascript-yellow?logo=javascript&labelColor=black)](https://www.javascript.com/)
+
+- Vite
+- Vue
+- Axios
+- Tailwind CSS
+
+
+
+
+## Autor
+
+Este projeto foi desenvolvido por mim Rian. Sinta-se à vontade para utilizá-lo e modificá-lo da forma que desejar. Feito somente para descontrair oque ando aprendendo
+
+ - 🚧  VueProject 🚀 Em construção...  🚧
