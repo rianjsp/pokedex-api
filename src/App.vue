@@ -1,54 +1,65 @@
 <template>
-  <div class="flex flex-col">
-    <div class="header border select-none rounded-3xl font-semibold items-center bg-white h-24 flex flex-row justify-around text-center mx-auto m-7">
-      <div class="logo drop-shadow-xl">
-        <img class="drop-shadow-xl" src="../public/pokemon-logo.png" alt="">
-      </div>
-      <div>
-        <Nav />
-      </div>
+  <div>
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 items-center justify-center bg-white z-50 flex flex-col">
+      <div><img src="../public/pokemon-logo.png" alt=""></div>
+      <span class="loader"></span>
     </div>
 
-    <div class="flex flex-wrap items-center justify-center select-none rounded-xl">
-      <div class="content flex items-center justify-center" v-for="poke in pokes" :key="poke.id">
-        <div class="card hover:scale-105 hover:bg-slate-400 border rounded-tl-xl inset-14">
-          <img :src="poke.sprite" :alt="`Imagem do ${poke.name}`" class="poke-image capitalize">
-          <div class="contentName">
-            <p class="text-black text-inherit font-semibold rounded-lg border" :style="{ backgroundColor: poke.color }">#{{ poke.id }}</p>
-            <p><strong class="capitalize">{{ poke.name }}</strong></p>
-          </div>
-          <button @click.prevent="openModal(poke.id)" class="details-button">
-            <strong>Detalhes</strong>
-          </button>
+    <!-- Conteúdo principal -->
+    <div id="app-content" class="flex flex-col backdrop-blur-md bg-black/30 rounded-2xl opacity-0 transition-opacity duration-500">
+      <div class="header border select-none rounded-3xl font-semibold items-center bg-white h-24 flex flex-row justify-around text-center mx-auto m-7">
+        <div class="logo drop-shadow-xl">
+          <img class="drop-shadow-xl" src="../public/pokemon-logo.png" alt="">
+        </div>
+        <div>
+          <Nav />
         </div>
       </div>
 
-      <!-- Overlay -->
-      <div v-if="isModalOpen" class="overlay"></div>
-
-      <dialog ref="dialog" class="modal">
-        <div class="dialog-content">
-          <strong><h1 class="text-center font-semibold capitalize">{{ selectedPoke?.name }}</h1></strong>
-          <div v-if="selectedPoke">
-            <img :src="selectedPoke.sprite" :alt="`Imagem do ${selectedPoke.name}`" class="modal-image">
-            <ul class="details-list">
-              <li><strong>ID:</strong> {{ selectedPoke.id }}</li>
-              <li><strong>Nome:</strong> <span class="capitalize">{{ selectedPoke.name }}</span></li>
-              <li><strong>Altura:</strong> {{ selectedPoke.details.height }}</li>
-              <li><strong>Peso:</strong> {{ selectedPoke.details.weight }}</li>
-              <li class="abilities">
-                <strong>Habilidades</strong>
-                <ul>
-                  <li v-for="ability in selectedPoke.details.abilities" :key="ability.ability.name" class="capitalize">
-                    {{ ability.ability.name }}
-                  </li>
-                </ul>
-              </li>
-            </ul>
+      <!-- Cards section -->
+      <div class="flex flex-wrap items-center justify-center select-none rounded-xl">
+        <div class="content flex items-center justify-center" v-for="poke in pokes" :key="poke.id">
+          <div class="card hover:scale-105 hover:bg-slate-400 border rounded-tl-xl inset-14">
+            <img :src="poke.sprite" :alt="`Imagem do ${poke.name}`" class="poke-image capitalize">
+            <div class="contentName">
+              <p class="text-black text-inherit font-semibold rounded-lg border" :style="{ backgroundColor: poke.color }">#{{ poke.id }}</p>
+              <p><strong class="capitalize">{{ poke.name }}</strong></p>
+            </div>
+            <button @click.prevent="openModal(poke.id)" class="details-button">
+              <strong>Detalhes</strong>
+            </button>
           </div>
-          <button @click="closeModal" class="close-button">Close</button>
         </div>
-      </dialog>
+
+        <!-- Overlay -->
+        <div v-if="isModalOpen" class="overlay"></div>
+
+        <!-- Modal -->
+        <dialog ref="dialog" class="modal">
+          <div class="dialog-content">
+            <strong><h1 class="text-center font-semibold capitalize">{{ selectedPoke?.name }}</h1></strong>
+            <div v-if="selectedPoke">
+              <img :src="selectedPoke.sprite" :alt="`Imagem do ${selectedPoke.name}`" class="modal-image">
+              <ul class="details-list">
+                <li><strong>ID:</strong> {{ selectedPoke.id }}</li>
+                <li><strong>Nome:</strong> <span class="capitalize">{{ selectedPoke.name }}</span></li>
+                <li><strong>Altura:</strong> {{ selectedPoke.details.height }}</li>
+                <li><strong>Peso:</strong> {{ selectedPoke.details.weight }}</li>
+                <li class="abilities">
+                  <strong>Habilidades</strong>
+                  <ul>
+                    <li v-for="ability in selectedPoke.details.abilities" :key="ability.ability.name" class="capitalize">
+                      {{ ability.ability.name }}
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <button @click="closeModal" class="close-button">Close</button>
+          </div>
+        </dialog>
+      </div>
 
       <!-- Waves para o background -->
       <div>
@@ -59,10 +70,9 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Nav from './components/Nav.vue';
 
 const pokes = ref([]);
@@ -85,7 +95,7 @@ const getPokeData = async (pokemon, index) => {
 };
 
 // Get na api principal para exibir detalhes
-axios.get('https://pokeapi.co/api/v2/pokemon?limit=100')
+axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000')
   .then(async (response) => {
     const pokeList = response.data.results;
     const pokesData = await Promise.all(pokeList.map(getPokeData));
@@ -109,31 +119,50 @@ function closeModal() {
   }
   isModalOpen.value = false;
 }
-</script>
 
+onMounted(() => {
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const appContent = document.getElementById('app-content');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+    if (appContent) {
+      appContent.style.opacity = '1';
+    }
+  });
+});
+</script>
 <style>
 body {
     margin: auto;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
-    background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
-    animation: gradient 15s ease infinite;
-    background-size: 400% 400%;
+    background: url(../public/pokemon-3840x2160.jpg) 50% repeat;
     background-attachment: fixed;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 100% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
+/* Preloader */
+#preloader {
+  background: #fff;
 }
 
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations and styles */
 .wave {
     background: rgb(255 255 255 / 25%);
     border-radius: 1000% 1000% 0 0;
@@ -188,7 +217,7 @@ body {
 
 .card {
   padding: 2rem;
-  margin: 2rem;
+  margin: 1rem;
   height: 18rem;
   width: 14rem;
   text-align: center;

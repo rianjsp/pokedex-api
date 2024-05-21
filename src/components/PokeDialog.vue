@@ -1,7 +1,7 @@
 <template>
 
   
-  <dialog ref="dialog" class="modal">
+  <dialog ref="dialog" class="modal ">
     <div class="dialog-content">
       <strong><h1 class="text-center font-semibold capitalize">{{ selectedPoke?.name }}</h1></strong>
       <div v-if="selectedPoke">
