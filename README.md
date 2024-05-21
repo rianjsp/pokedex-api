@@ -12,14 +12,14 @@ Este é um projeto simples de uma Pokédex utilizando a API do Pokémon. Foi des
 
 ## Funcionalidades
 
-- Listagem de pokémons necessarios para o projeto.
+- Listagem de todos os pokémons da api no projeto.
 - Detalhes de cada Pokémon, incluindo nome, tipo, habilidades e imagem.
 - Pesquisa de cada Pokémon existente na api (por ID ou Nome).
   
 ## Como executar o projeto
 
 1. Clone o repositório
-2. Entre na pasta do projeto `cd appVue`
+2. Instale as dependencias do vue + vite
 3. Execute o projeto com `npm run dev`
 
 ## API utilizada
