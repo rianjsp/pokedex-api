@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <!-- Preloader -->
     <div id="preloader" class="fixed inset-0 items-center justify-center bg-white z-50 flex flex-col">
       <div><img src="../public/pokemon-logo.png" alt=""></div>
@@ -95,7 +95,7 @@ const getPokeData = async (pokemon, index) => {
 };
 
 // Get na api principal para exibir detalhes
-axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000')
+axios.get('https://pokeapi.co/api/v2/pokemon?limit=100')
   .then(async (response) => {
     const pokeList = response.data.results;
     const pokesData = await Promise.all(pokeList.map(getPokeData));
@@ -132,14 +132,26 @@ onMounted(() => {
     }
   });
 });
+
 </script>
+
+
 <style>
+@import url('https://fonts.cdnfonts.com/css/logotype');
 body {
+    font-family: 'Public Pixel', sans-serif;                                                                                         
     margin: auto;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
-    background: url(../public/pokemon-3840x2160.jpg) 50% repeat;
+    background: url(../public/pokemon-3840x2160.jpg) 90% repeat;
     background-attachment: fixed;
+}
+
+*{
+ font-family: 'LOGOTYPE', sans-serif;
+font-family: 'LOGOTYPE-Hollow', sans-serif;
+font-family: 'LOGOTYPE-Inverse', sans-serif;
+font-family: 'LOGOTYPE-Light', sans-serif;                                              
 }
 
 /* Preloader */
