@@ -11,10 +11,10 @@
 
     <div class="flex flex-wrap items-center justify-center select-none rounded-xl">
       <div class="content flex items-center justify-center" v-for="poke in pokes" :key="poke.id">
-        <div class="card hover:bg-slate-400">
+        <div class="card hover:scale-105 hover:bg-slate-400 border rounded-tl-xl inset-14">
           <img :src="poke.sprite" :alt="`Imagem do ${poke.name}`" class="poke-image capitalize">
           <div class="contentName">
-            <p>{{ poke.id }}</p>
+            <p class="text-black text-inherit font-semibold rounded-lg border" :style="{ backgroundColor: poke.color }">#{{ poke.id }}</p>
             <p><strong class="capitalize">{{ poke.name }}</strong></p>
           </div>
           <button @click.prevent="openModal(poke.id)" class="details-button">
@@ -70,18 +70,25 @@ const selectedPoke = ref(null);
 const dialog = ref(null);
 const isModalOpen = ref(false);
 
-axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000')
+// Função para obter detalhes do Pokémon e sua cor
+const getPokeData = async (pokemon, index) => {
+  const pokeDetails = await axios.get(pokemon.url);
+  const colorResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${index + 1}`);
+  const colorName = colorResponse.data.color.name;
+  return {
+    id: index + 1,
+    name: pokemon.name,
+    sprite: pokeDetails.data.sprites.front_default,
+    details: pokeDetails.data,
+    color: colorName,
+  };
+};
+
+// Get na api principal para exibir detalhes
+axios.get('https://pokeapi.co/api/v2/pokemon?limit=100')
   .then(async (response) => {
     const pokeList = response.data.results;
-    const pokesData = await Promise.all(pokeList.map(async (pokemon, index) => {
-      const pokeDetails = await axios.get(pokemon.url);
-      return {
-        id: index + 1,
-        name: pokemon.name,
-        sprite: pokeDetails.data.sprites.front_default,
-        details: pokeDetails.data
-      };
-    }));
+    const pokesData = await Promise.all(pokeList.map(getPokeData));
     pokes.value = pokesData;
   })
   .catch(error => {

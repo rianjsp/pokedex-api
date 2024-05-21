@@ -94,7 +94,6 @@ export default {
 
 .abilities {
   margin-top: 1rem;
-  border-top: 2px solid red;
   padding-top: 0.5rem;
 }
 
