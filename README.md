@@ -25,6 +25,9 @@ Este é um projeto simples de uma Pokédex utilizando a API do Pokémon. Foi des
 ## API utilizada
 
 A API utilizada neste projeto foi a [Pokémon API](https://pokeapi.co/), que fornece informações detalhadas sobre todos os Pokémons.
+1. https://pokeapi.co/api/v2/pokemon?limit=1000
+2. https://pokeapi.co/api/v2/pokemon-species
+
 
 ## Tecnologias utilizadas 
 [![JavaScript](https://img.shields.io/badge/Javascript-yellow?logo=javascript&labelColor=black)](https://www.javascript.com/)
