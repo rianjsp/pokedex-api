@@ -19,7 +19,7 @@ Este é um projeto simples de uma Pokédex utilizando a API do Pokémon. Foi des
 ## Como executar o projeto
 
 1. Clone o repositório
-2. Instale as dependências com `npm install`
+2. Entre na pasta do projeto `cd appVue`
 3. Execute o projeto com `npm run dev`
 
 ## API utilizada
