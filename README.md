@@ -40,7 +40,9 @@ A API utilizada neste projeto foi a [Pokémon API](https://pokeapi.co/), que for
 
 
 
-## Autor
+## Utilidades
+
+Utilizei em algumas partes IA para códigos de waves entre outras codigos de estilização e bugs.
 
 Este projeto foi desenvolvido por mim Rian. Sinta-se à vontade para utilizá-lo e modificá-lo da forma que desejar. Feito somente para descontrair tudo que ando aprendendo.
 
